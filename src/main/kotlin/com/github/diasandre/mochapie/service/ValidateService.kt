@@ -2,15 +2,23 @@ package com.github.diasandre.mochapie.service
 
 import com.github.diasandre.mochapie.enums.Header.AUTH_REQUIRED
 import com.github.diasandre.mochapie.enums.Header.IS_REQUIRED
+import com.github.diasandre.mochapie.exceptions.ValidatorException
 import com.github.diasandre.mochapie.util.removeWhitespaceAndSplit
+import org.springframework.http.HttpStatus.BAD_REQUEST
+import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.stereotype.Service
+
+//TODO improve isValidRequiredHeaders to show what header is missing
 
 @Service
 class ValidateService {
 
     fun isValidHeader(headers: Map<String, String>): Nothing? = when {
-        !headers.isValidAuth() -> error("auth is required")
-        !headers.isValidRequiredHeaders() -> error("required header is missing") //TODO improve to show what header is missing
+        !headers.isValidAuth() -> throw ValidatorException(UNAUTHORIZED, "auth is required")
+        !headers.isValidRequiredHeaders() -> throw ValidatorException(
+            BAD_REQUEST,
+            "required header is missing"
+        )
         else -> null
     }
 
@@ -25,8 +33,6 @@ class ValidateService {
             ?.let(String::removeWhitespaceAndSplit)
             ?: emptyList()
 
-        return requiredHeaders.all {
-            this[it] != null
-        }
+        return requiredHeaders.all { this[it] != null }
     }
 }

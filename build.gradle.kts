@@ -13,6 +13,10 @@ java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
     mavenCentral()
+    maven {
+        name = "jitpack"
+        url = uri("https://jitpack.io")
+    }
 }
 
 dependencies {
@@ -26,6 +30,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.github.diasandre:invoke:0.1.4")
 }
 
 tasks.withType<KotlinCompile> {
