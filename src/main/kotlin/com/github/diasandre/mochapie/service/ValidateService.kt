@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.stereotype.Service
 
-//TODO improve isValidRequiredHeaders to show what header is missing
+// TODO improve isValidRequiredHeaders to show what header is missing
 
 @Service
 class ValidateService {

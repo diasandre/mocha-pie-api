@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RestController
-import java.util.*
+import java.util.UUID
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-
 class Controller(private val service: DataService, private val validateService: ValidateService) {
 
     @PostMapping("/")

@@ -3,7 +3,7 @@ package com.github.diasandre.mochapie.service
 import com.github.diasandre.mochapie.model.StoredData
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.UUID
 import java.util.UUID.randomUUID
 import java.util.concurrent.TimeUnit.MINUTES
 

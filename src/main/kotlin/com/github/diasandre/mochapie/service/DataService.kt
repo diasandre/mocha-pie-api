@@ -3,9 +3,10 @@ package com.github.diasandre.mochapie.service
 import com.github.diasandre.mochapie.exceptions.ValidatorException
 import com.github.diasandre.mochapie.model.StoredData
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatus.*
+import org.springframework.http.HttpStatus.NOT_FOUND
 import org.springframework.stereotype.Service
-import java.util.*
+import java.util.Objects
+import java.util.UUID
 
 @Service
 class DataService(private val redisService: RedisService) {
@@ -15,7 +16,7 @@ class DataService(private val redisService: RedisService) {
     fun getByStatus(uuid: UUID, status: HttpStatus): String? =
         redisService.get(uuid).takeIf(Objects::nonNull)?.getByStatus(status)
 
-    //TODO improve isValid
+    // TODO improve isValid
     fun isValid(data: StoredData): Boolean = when {
         data.values.isEmpty() -> error("value is empty")
         else -> true

@@ -5,7 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.springframework.data.redis.serializer.RedisSerializer
 
-
 class RedisJsonSerializer() : RedisSerializer<StoredData> {
 
     private val gson: Gson = GsonBuilder().create()
