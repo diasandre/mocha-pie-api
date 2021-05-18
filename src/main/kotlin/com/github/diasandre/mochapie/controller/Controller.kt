@@ -1,7 +1,7 @@
 package com.github.diasandre.mochapie.controller
 
 import com.github.diasandre.invoke
-import com.github.diasandre.mochapie.model.StoredData
+import com.github.diasandre.mochapie.model.DataDTO
 import com.github.diasandre.mochapie.service.DataService
 import com.github.diasandre.mochapie.service.ValidateService
 import com.github.diasandre.mochapie.util.getStatus
@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 import javax.servlet.http.HttpServletResponse
 
 @RestController
+@RequestMapping("/api")
 class Controller(private val service: DataService, private val validateService: ValidateService) {
 
     @PostMapping("/")
-    fun save(@RequestBody data: StoredData?) = service.save(data)
+    fun save(@RequestBody data: DataDTO) = service.save(data)
 
     @GetMapping("/{uuid}")
     fun get(
@@ -34,5 +36,5 @@ class Controller(private val service: DataService, private val validateService: 
     }
 
     @GetMapping("/{uuid}/edit")
-    fun getAll(@PathVariable("uuid") uuid: UUID): StoredData? = service.get(uuid)
+    fun getAll(@PathVariable("uuid") uuid: UUID): DataDTO? = service.get(uuid)
 }
