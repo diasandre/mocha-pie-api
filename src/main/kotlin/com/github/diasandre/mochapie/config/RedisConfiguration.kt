@@ -1,6 +1,6 @@
 package com.github.diasandre.mochapie.config
 
-import com.github.diasandre.mochapie.model.StoredData
+import com.github.diasandre.mochapie.model.DataDTO
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -29,7 +29,7 @@ class RedisConfiguration {
     }
 
     @Bean
-    fun redisTemplate(): RedisTemplate<String, StoredData?> = RedisTemplate<String, StoredData?>().apply {
+    fun redisTemplate(): RedisTemplate<String, DataDTO?> = RedisTemplate<String, DataDTO?>().apply {
         setConnectionFactory(jedisConnectionFactory())
         valueSerializer = RedisJsonSerializer()
         keySerializer = StringRedisSerializer()
