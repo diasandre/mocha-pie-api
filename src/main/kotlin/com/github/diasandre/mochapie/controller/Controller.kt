@@ -6,6 +6,7 @@ import com.github.diasandre.mochapie.service.DataService
 import com.github.diasandre.mochapie.service.ValidateService
 import com.github.diasandre.mochapie.util.getStatus
 import com.github.diasandre.mochapie.util.setResponse
+import com.github.diasandre.mochapie.util.toUUID
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -36,5 +37,5 @@ class Controller(private val service: DataService, private val validateService: 
     }
 
     @GetMapping("/{uuid}/edit")
-    fun getAll(@PathVariable("uuid") uuid: UUID): DataDTO? = service.get(uuid)
+    fun getAll(@PathVariable("uuid") uuid: String): DataDTO? = service.get(uuid.toUUID())
 }

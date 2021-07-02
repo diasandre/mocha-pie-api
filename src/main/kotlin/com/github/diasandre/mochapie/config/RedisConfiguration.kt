@@ -4,6 +4,7 @@ import com.github.diasandre.mochapie.model.DataDTO
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.data.redis.connection.RedisPassword
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory
@@ -19,9 +20,14 @@ class RedisConfiguration {
     @Value("\${spring.redis.port}")
     lateinit var redisPort: String
 
+    @Value("\${spring.redis.password}")
+    lateinit var redisPassword: String
+
     @Bean
     fun jedisConnectionFactory(): JedisConnectionFactory {
-        val config = RedisStandaloneConfiguration(redisHost, redisPort.toInt())
+        val config = RedisStandaloneConfiguration(redisHost, redisPort.toInt()).apply {
+            password = RedisPassword.of(redisPassword)
+        }
         val jedisClientConfiguration = JedisClientConfiguration.builder().usePooling().build()
         return JedisConnectionFactory(config, jedisClientConfiguration).apply {
             afterPropertiesSet()
