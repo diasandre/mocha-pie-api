@@ -9,8 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 @EnableWebMvc
 class CorsFilter : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**")
-            .allowedOrigins("https://mocha-pie.netlify.app")
+        registry.addMapping("/api/**")
+            .allowedOrigins("https://mocha-pie.netlify.app", "http://localhost:3000")
             .allowedMethods("GET", "POST")
     }
 }
